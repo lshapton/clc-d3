@@ -8,10 +8,6 @@ svg {
   margin-top: 25px;
 }
 
-circle {
-  fill: #00BFFF;
-}
-
 circle:hover {
   fill: #F89841;
 }
