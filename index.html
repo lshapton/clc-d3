@@ -37,6 +37,11 @@
         .domain(d3.range(dataset.length))
         .range([padding * 2, w])
 
+			//Axis
+			var yAxis = d3.axisLeft(yScale)
+				.ticks(5);
+			var xAxis = d3.axisBottom(xScale).tickFormat("");
+
 			// Create SVG element
 			var svg = d3.select("body")
 				.append("svg")
@@ -51,6 +56,45 @@
 				.attr('cy', (d) => yScale(d.temperature))
 				.attr('cx', (d,i) => xScale(i))
 				.attr('r', 20)
+
+			//Create labels
+			svg.selectAll("text")
+				.data(dataset)
+				.enter()
+				.append("text")
+				.attr("class", "months")
+				.attr('y', h - (padding * 2) + 20)
+				.attr('x', (d,i) => xScale(i) - 10)
+				.text((d)=> d.label)
+
+			// Add yAxis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(" + padding + ",0)")
+				.call(yAxis);
+
+			// yAxis label
+			svg.append("text")
+				.attr("class", "axisLabel")
+				.attr("transform", "rotate(-90)")
+				.attr("y", 0)
+				.attr("x",0 - (h / 2))
+				.attr("dy", 20)
+				.style("text-anchor", "middle")
+				.text("Temperature");
+
+			// Add xAxis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate(-" + padding + "," + (h - (padding * 2)) + ")")
+				.call(xAxis);
+
+			// xAxis label
+			svg.append("text")
+				.attr("class", "axisLabel")
+				.attr("transform","translate(" + (w/2) + " ," + (h - 40) + ")")
+				.style("text-anchor", "middle")
+				.text("Month");
 		</script>
 	</body>
 </html>

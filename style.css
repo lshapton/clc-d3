@@ -15,3 +15,7 @@ circle {
 circle:hover {
   fill: #F89841;
 }
+
+.months {
+  font-size: 12px;
+}
