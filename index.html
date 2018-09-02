@@ -49,6 +49,13 @@
 				.ticks(5);
 			var xAxis = d3.axisBottom(xScale).tickFormat("");
 
+			//Gridlines
+			var gridlines = d3.axisLeft()
+				.ticks(5)
+				.tickFormat("")
+				.tickSize(- ( w - (padding *2)))
+				.scale(yScale);
+
 			// Create SVG element
 			var svg = d3.select("body")
 				.append("svg")
@@ -131,6 +138,12 @@
 				.attr("transform","translate(" + (w/2) + " ," + (h - 40) + ")")
 				.style("text-anchor", "middle")
 				.text("Month");
+
+			// Create horizontal gridlines
+			svg.append("g")
+			 .attr("class", "grid")
+			 .attr("transform", "translate(" + padding + ",0)")
+			 .call(gridlines);
 		</script>
 	</body>
 </html>

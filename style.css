@@ -41,3 +41,17 @@ circle:hover {
   font-size: 16px;
   line-height: 20px;
 }
+
+.grid path {
+  stroke:none;
+}
+
+.axis line {
+  stroke:none;
+}
+
+.grid line {
+  fill: none;
+  stroke: #9AA2A1;
+  stroke-width: 1px;
+}
