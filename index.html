@@ -12,13 +12,45 @@
       // Width and height
       var w = 1200;
       var h = 500;
+			var padding = 50;
+			var dataset = [
+        { label: "Jan", temperature: -3, rainfall: 40 },
+        { label: "Feb", temperature: -3, rainfall: 40 },
+        { label: "Mar", temperature: 1, rainfall: 40 },
+        { label: "Apr", temperature: 7, rainfall: 50 },
+        { label: "May", temperature: 14, rainfall: 30},
+        { label: "Jun", temperature: 16, rainfall: 40 },
+        { label: "Jul", temperature: 21, rainfall: 60 },
+        { label: "Aug", temperature: 21, rainfall: 50 },
+        { label: "Sep", temperature: 18, rainfall: 40 },
+        { label: "Oct", temperature: 11, rainfall: 40 },
+        { label: "Nov", temperature: 5, rainfall: 50 },
+        { label: "Dec", temperature: -1, rainfall: 20}
+      ]
+			var minTemperature = d3.min(dataset, (d) => d.temperature)
+			var maxTemperature = d3.max(dataset, (d) => d.temperature)
+			var range = maxTemperature - minTemperature
+			var yScale = d3.scaleLinear()
+				.domain([minTemperature - 5, maxTemperature + 5])
+				.range([h - (padding * 2), padding]);
+			var xScale = d3.scaleBand()
+        .domain(d3.range(dataset.length))
+        .range([padding * 2, w])
 
-      // Create SVG element
-      var svg = d3.select("body")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
+			// Create SVG element
+			var svg = d3.select("body")
+				.append("svg")
+				.attr("width", w)
+				.attr("height", h);
 
+			// Create circles
+			svg.selectAll("circle")
+				.data(dataset)
+				.enter()
+				.append("circle")
+				.attr('cy', (d) => yScale(d.temperature))
+				.attr('cx', (d,i) => xScale(i))
+				.attr('r', 20)
 		</script>
 	</body>
 </html>

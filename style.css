@@ -6,5 +6,12 @@ body {
 
 svg {
   margin-top: 25px;
-  background-color: #DDD;
+}
+
+circle {
+  fill: #00BFFF;
+}
+
+circle:hover {
+  fill: #F89841;
 }
